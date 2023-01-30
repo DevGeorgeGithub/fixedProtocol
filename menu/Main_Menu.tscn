@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menu/Main_Menu.gd" type="Script" id=1]
+
+[node name="Main_Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+mainArea = "res://Main.tscn"
+
+[node name="Start_Menu" type="Panel" parent="."]
+margin_right = 330.0
+margin_bottom = 720.0
+
+[node name="Title_Label" type="Label" parent="Start_Menu"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 227.0
+margin_bottom = 77.0
+rect_scale = Vector2( 1.4, 1.4 )
+text = "Godot 3
+"
+align = 1
+valign = 1
+
+[node name="Button_Start" type="Button" parent="Start_Menu/Title_Label"]
+margin_left = -14.0
+margin_top = 293.0
+margin_right = 222.0
+margin_bottom = 334.0
+text = "Start Game"
+
+[node name="Button_Options" type="Button" parent="Start_Menu/Title_Label"]
+margin_left = -14.0
+margin_top = 335.0
+margin_right = 222.0
+margin_bottom = 376.0
+text = "Options"
+
+[node name="Button_Quit" type="Button" parent="Start_Menu/Title_Label"]
+margin_left = -14.0
+margin_top = 378.0
+margin_right = 222.0
+margin_bottom = 419.0
+text = "Quit"
+
+[node name="Options_Menu" type="Panel" parent="."]
+visible = false
+margin_right = 330.0
+margin_bottom = 720.0
+
+[node name="Title_Label" type="Label" parent="Options_Menu"]
+margin_left = -1.0
+margin_top = 10.0
+margin_right = 325.0
+margin_bottom = 53.0
+text = "Options"
+align = 1
+valign = 1
+
+[node name="Label_Mouse_Sensitivity2" type="Label" parent="Options_Menu"]
+margin_left = -1.0
+margin_top = 121.0
+margin_right = 325.0
+margin_bottom = 164.0
+text = "Mouse sensitivity"
+align = 1
+valign = 1
+
+[node name="HSlider_Mouse_Sensitivity" type="HSlider" parent="Options_Menu"]
+margin_left = 10.0
+margin_top = 160.0
+margin_right = 320.0
+margin_bottom = 176.0
+min_value = 0.001
+max_value = 0.4
+step = 0.004
+value = 0.012
+
+[node name="Button_Fullscreen" type="Button" parent="Options_Menu"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -135.0
+margin_top = -400.0
+margin_right = 135.0
+margin_bottom = -350.0
+text = "Fullscreen"
+
+[node name="Button_Back" type="Button" parent="Options_Menu"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -138.0
+margin_top = -171.0
+margin_right = 132.0
+margin_bottom = -121.0
+text = "Back"

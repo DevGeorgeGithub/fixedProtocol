@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+
+[node name="Knife" type="Spatial"]
+
+[node name="Root" type="Spatial" parent="."]
+
+[node name="Anchor" type="Spatial" parent="Root"]
+
+[node name="Body" type="Spatial" parent="Root/Anchor"]
+
+[node name="Upper" type="MeshInstance" parent="Root/Anchor/Body"]
+transform = Transform( 0.0321661, 0, 0, 0, 0.0155518, 0, 0, 0, 0.127687, 0, 0, 0 )
+mesh = SubResource( 2 )
+
+[node name="Upper2" type="MeshInstance" parent="Root/Anchor/Body"]
+transform = Transform( 0.0321661, 0, 0, 0, 0.000263275, -0.127669, 0, 0.0155496, 0.0021616, -0.00111142, -0.120661, 0.107517 )
+mesh = SubResource( 2 )

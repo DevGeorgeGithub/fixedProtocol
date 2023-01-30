@@ -1,0 +1,35 @@
+[gd_scene format=2]
+
+[node name="Pause_Popup" type="WindowDialog"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -146.0
+margin_top = -128.0
+margin_right = 248.0
+margin_bottom = 162.0
+
+[node name="Button_resume" type="Button" parent="."]
+margin_left = 46.0
+margin_top = 134.0
+margin_right = 359.0
+margin_bottom = 196.0
+text = "Resume"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 9.0
+margin_right = 385.0
+margin_bottom = 99.0
+text = "GAME PAUSED"
+align = 1
+valign = 1
+
+[node name="Button_quit" type="Button" parent="."]
+margin_left = 44.0
+margin_top = 213.0
+margin_right = 357.0
+margin_bottom = 275.0
+text = "Quit"

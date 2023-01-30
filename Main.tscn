@@ -1,0 +1,134 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/Player.gd" type="Script" id=2]
+[ext_resource path="res://scene/Cubes.gd" type="Script" id=3]
+[ext_resource path="res://scene/Utility/Health_Pickup.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/Utility/Ammo_Pickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/Target_Whole.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scene/Turret.tscn" type="PackedScene" id=7]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 40, 40 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0, 0, 1 )
+roughness = 0.2
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 20, 1, 20 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=6]
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 1, 1.03273, 1.00164 )
+
+[sub_resource type="CubeMesh" id=8]
+
+[sub_resource type="ProceduralSky" id=9]
+
+[sub_resource type="Environment" id=10]
+background_mode = 2
+background_sky = SubResource( 9 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_sky_contribution = 0.6
+tonemap_mode = 3
+ssao_enabled = true
+glow_intensity = 1.0
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+
+[node name="Main" type="Spatial"]
+
+[node name="Level" type="Spatial" parent="."]
+
+[node name="Floor" type="MeshInstance" parent="Level"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Level/Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Floor/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0 )
+shape = SubResource( 3 )
+
+[node name="Walls" type="Spatial" parent="Level"]
+
+[node name="Wall1" type="MeshInstance" parent="Level/Walls"]
+transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 20, -20, 10, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall1"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall1/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall2" type="MeshInstance" parent="Level/Walls"]
+transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 20, 21, 10, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall2/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall3" type="MeshInstance" parent="Level/Walls"]
+transform = Transform( -4.37114e-08, 0, 20, 0, 10, 0, -1, 0, -8.74228e-07, 0, 10, -21 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall3/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall4" type="MeshInstance" parent="Level/Walls"]
+transform = Transform( -4.37114e-08, 0, 20, 0, 10, 0, -1, 0, -8.74228e-07, 0, 10, 21 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall4/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -1, 39, 0 )
+
+[node name="Player" parent="Level" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="RigidBody" type="RigidBody" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.939095, 6.60207 )
+mass = 5.0
+gravity_scale = 3.0
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/RigidBody"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Level/RigidBody"]
+mesh = SubResource( 8 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource( 10 )
+
+[node name="Health_Pickup" parent="Level" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8441, 1.41756, -5.55226 )
+
+[node name="Ammo_Pickup" parent="Level" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8441, 1.41756, -9.75877 )
+
+[node name="Target_Whole" parent="Level" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.9333, 4.61808, -0.0969744 )
+
+[node name="Turret" parent="Level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1297, 2.80773, 12.5786 )
+use_raycast = false
