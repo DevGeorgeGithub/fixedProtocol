@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://scene/weapons/Pistol/Pistol_point.gd" type="Script" id=1]
 [ext_resource path="res://scene/weapons/Knife/Weapon_Knife.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://models/Barrel.material" type="Material" id=14]
 [ext_resource path="res://models/Casin.material" type="Material" id=15]
 [ext_resource path="res://models/n4a1.material" type="Material" id=16]
+[ext_resource path="res://models/muzzle_05.png" type="Texture" id=17]
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.664231, 0.520891, 0.298525 )
@@ -116,6 +117,35 @@ bind/1/name = "Casin"
 bind/1/bone = -1
 bind/1/pose = Transform( 1.51255e-07, -0.776833, 1.58834e-21, 0.776833, 1.51255e-07, -1.04374e-07, 1.04374e-07, 2.03224e-14, 0.776833, -1.82078, 5.23142, -2.20183 )
 
+[sub_resource type="SpatialMaterial" id=88]
+flags_transparent = true
+albedo_color = Color( 1, 0.827451, 0, 1 )
+albedo_texture = ExtResource( 17 )
+emission_enabled = true
+emission = Color( 1, 0.952941, 0.470588, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="ParticlesMaterial" id=85]
+next_pass = SubResource( 88 )
+lifetime_randomness = 0.1
+gravity = Vector3( 0, 0, 0 )
+
+[sub_resource type="SpatialMaterial" id=87]
+flags_transparent = true
+albedo_color = Color( 0.984314, 0.972549, 0.172549, 1 )
+albedo_texture = ExtResource( 17 )
+emission_enabled = true
+emission = Color( 1, 0.854902, 0.360784, 1 )
+emission_energy = 0.8
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="QuadMesh" id=86]
+material = SubResource( 87 )
+size = Vector2( 0.5, 0.5 )
+
 [sub_resource type="ArrayMesh" id=67]
 resource_name = "rifle_Меш"
 surfaces/0 = {
@@ -199,29 +229,17 @@ surfaces/3 = {
 
 [sub_resource type="Animation" id=10]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Weapons/Rifle:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -4.837, 0, 0 ) ]
-}
 
 [sub_resource type="Animation" id=11]
 resource_name = "knifeEquip"
-length = 0.5
+length = 0.2
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Weapons/Knife")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, -2.29958, -1.70731, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1, 0.5, 1, -0.358886, 0.271821, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1 )
+tracks/0/keys = PoolRealArray( 0, 1, -2.29958, -1.70731, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1, 0.2, 1, -0.358886, 0.271821, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1 )
 
 [sub_resource type="Animation" id=12]
 resource_name = "knifeFire"
@@ -273,39 +291,25 @@ tracks/0/keys = PoolRealArray( 0, 1, -0.358886, 0.271821, 0, 0, 0, 0, 1, 0.1, 0.
 
 [sub_resource type="Animation" id=14]
 resource_name = "knifeUnequip"
-length = 0.5
-tracks/0/type = "method"
-tracks/0/path = NodePath("..")
+length = 0.2
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Weapons/Knife")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "equip"
-} ]
-}
-tracks/1/type = "transform"
-tracks/1/path = NodePath("Weapons/Knife")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = PoolRealArray( 0, 1, -0.358886, 0.271821, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1, 0.5, 1, -2.29958, -1.70731, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1 )
+tracks/0/keys = PoolRealArray( 0, 1, -0.358886, 0.271821, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1, 0.2, 1, -2.29958, -1.70731, 0, 0, 0, 0, 1, 0.1, 0.1, 0.1 )
 
 [sub_resource type="Animation" id=55]
 resource_name = "pistolEquip"
-length = 0.5
+length = 0.2
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Weapons/Pistol/Armature")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, -2.54527, -2.96361, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1, 0.5, 1, 0, -0.756104, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1 )
+tracks/0/keys = PoolRealArray( 0, 1, -2.54527, -2.96361, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1, 0.2, 1, 0, -0.756104, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1 )
 
 [sub_resource type="Animation" id=56]
 resource_name = "pistolFire"
@@ -338,6 +342,18 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 0, -0.5, 0, 0, 0, 0, 1, 1, 1, 1, 0.5, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
+tracks/3/type = "value"
+tracks/3/path = NodePath("Weapons/Pistol/Flash:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="Animation" id=57]
 resource_name = "pistolIdle"
@@ -354,55 +370,48 @@ tracks/0/keys = PoolRealArray( 0, 1, 0, -0.756104, -1.48157, 0.121714, -0.805488
 resource_name = "pistolReload"
 length = 0.5
 tracks/0/type = "transform"
-tracks/0/path = NodePath("Weapons/Pistol/Armature")
+tracks/0/path = NodePath("Weapons/Pistol/Armature/Skeleton:Magazine")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, -0.756104, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1, 0.1, 1, 0, -0.145227, -1.48157, -0.0186369, -0.806805, 0.0926384, 0.583212, 1, 1, 1, 0.5, 1, 0, -0.756104, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1 )
+tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.5, 1, 0, -5, 0, 0, 0, 0, 1, 1, 1, 1 )
 tracks/1/type = "transform"
-tracks/1/path = NodePath("Weapons/Pistol/Armature/Skeleton:Magazine")
+tracks/1/path = NodePath("Weapons/Pistol")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.5, 1, 0, -5, 0, 0, 0, 0, 1, 1, 1, 1 )
+tracks/1/keys = PoolRealArray( 0, 1, -0.16, -0.109517, 0.752617, 0, 0, 0, 1, 1, 1, 1, 0.1, 1, -0.16, 0.215643, 2.02562, -0.223965, 0, 0, 0.974597, 1, 1, 1, 0.5, 1, -0.16, -0.109517, 0.752617, 0, 0, 0, 1, 1, 1, 1 )
+tracks/2/type = "transform"
+tracks/2/path = NodePath("Weapons/Pistol/Armature/Skeleton:Slider")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [sub_resource type="Animation" id=59]
 resource_name = "pistolUnequip"
-length = 0.5
+length = 0.2
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Weapons/Pistol/Armature")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, -0.756104, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1, 0.5, 1, -2.54527, -2.96361, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1 )
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "equip"
-} ]
-}
+tracks/0/keys = PoolRealArray( 0, 1, 0, -0.756104, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1, 0.2, 1, -2.54527, -2.96361, -1.48157, 0.121714, -0.805488, -0.10347, 0.570674, 1, 1, 1 )
 
 [sub_resource type="Animation" id=69]
 resource_name = "rifleEquip"
-length = 0.5
+length = 0.2
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Weapons/Rifle")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, -2.03681, -1.17886, -2.40569, 0, 0, 0, 1, 0.9, 0.9, 0.9, 0.5, 1, 0.171848, -0.0939059, -1.38797, 0, 0, 0, 1, 0.9, 0.9, 0.9 )
+tracks/0/keys = PoolRealArray( 0, 1, -2.03681, -1.17886, -2.40569, 0, 0, 0, 1, 0.9, 0.9, 0.9, 0.2, 1, 0.171848, -0.0939059, -1.38797, 0, 0, 0, 1, 0.9, 0.9, 0.9 )
 
 [sub_resource type="Animation" id=70]
 resource_name = "rifleFire"
@@ -414,6 +423,18 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = PoolRealArray( 0, 1, 0.171848, -0.0939059, -1.38797, 0, 0, 0, 1, 0.9, 0.9, 0.9, 0.3, 1, 0.171848, -0.0939059, -1.72604, 0, 0, 0, 1, 0.9, 0.9, 0.9, 0.5, 1, 0.171848, -0.0939059, -1.38797, 0, 0, 0, 1, 0.9, 0.9, 0.9 )
+tracks/1/type = "value"
+tracks/1/path = NodePath("Weapons/Rifle/Flash:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="Animation" id=71]
 resource_name = "rifleIdle"
@@ -451,35 +472,28 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=73]
 resource_name = "rifleUnequip"
-length = 0.5
+length = 0.2
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Weapons/Rifle")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0.171848, -0.0939059, -1.38797, 0, 0, 0, 1, 0.9, 0.9, 0.9, 0.5, 1, -2.03681, -1.17886, -2.40569, 0, 0, 0, 1, 0.9, 0.9, 0.9 )
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "equip"
-} ]
-}
+tracks/0/keys = PoolRealArray( 0, 1, 0.171848, -0.0939059, -1.38797, 0, 0, 0, 1, 0.9, 0.9, 0.9, 0.2, 1, -2.03681, -1.17886, -2.40569, 0, 0, 0, 1, 0.9, 0.9, 0.9 )
 
-[sub_resource type="Animation" id=15]
-resource_name = "unarmed"
+[sub_resource type="Animation" id=84]
+resource_name = "unarmedEquip"
 length = 0.048
+tracks/0/type = "transform"
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
 
 [sub_resource type="Animation" id=42]
-resource_name = "unarmedFinished"
+resource_name = "unarmedUnequip"
 length = 0.048
 tracks/0/type = "transform"
 tracks/0/path = NodePath("..")
@@ -538,7 +552,7 @@ input_2/name = "state 2"
 input_2/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=31]
-graph_offset = Vector2( -514.922, -36.5676 )
+graph_offset = Vector2( -361.822, -24.6794 )
 "nodes/Animation 2/node" = SubResource( 25 )
 "nodes/Animation 2/position" = Vector2( -400, 360 )
 "nodes/Animation 3/node" = SubResource( 26 )
@@ -550,9 +564,9 @@ graph_offset = Vector2( -514.922, -36.5676 )
 nodes/OneShot/node = SubResource( 29 )
 nodes/OneShot/position = Vector2( -180, 220 )
 nodes/Transition/node = SubResource( 30 )
-nodes/Transition/position = Vector2( 300, 60 )
+nodes/Transition/position = Vector2( 140, 60 )
 nodes/output/position = Vector2( 500, 80 )
-node_connections = [ "OneShot", 0, "Animation 3", "OneShot", 1, "Animation 2", "Transition", 0, "Animation 6", "Transition", 1, "OneShot", "Transition", 2, "Animation 4", "output", 0, "Transition" ]
+node_connections = [ "output", 0, "Transition", "OneShot", 0, "Animation 3", "OneShot", 1, "Animation 2", "Transition", 0, "Animation 6", "Transition", 1, "OneShot", "Transition", 2, "Animation 4" ]
 
 [sub_resource type="AnimationNodeAnimation" id=60]
 animation = "pistolFire"
@@ -583,7 +597,7 @@ input_3/name = "state 3"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=48]
-graph_offset = Vector2( -352.475, 136.453 )
+graph_offset = Vector2( -461.611, 2.35681 )
 nodes/Animation/node = SubResource( 64 )
 nodes/Animation/position = Vector2( 120, 60 )
 "nodes/Animation 2/node" = SubResource( 60 )
@@ -598,8 +612,8 @@ nodes/OneShot/node = SubResource( 65 )
 nodes/OneShot/position = Vector2( 0, 200 )
 nodes/Transition/node = SubResource( 66 )
 nodes/Transition/position = Vector2( 318.24, 177.12 )
-nodes/output/position = Vector2( 500, 140 )
-node_connections = [ "OneShot", 0, "Animation 3", "OneShot", 1, "Animation 2", "Transition", 0, "Animation", "Transition", 1, "OneShot", "Transition", 2, "Animation 5", "Transition", 3, "Animation 4", "output", 0, "Transition" ]
+nodes/output/position = Vector2( 720, 120 )
+node_connections = [ "output", 0, "Transition", "OneShot", 0, "Animation 3", "OneShot", 1, "Animation 2", "Transition", 0, "Animation", "Transition", 1, "OneShot", "Transition", 2, "Animation 5", "Transition", 3, "Animation 4" ]
 
 [sub_resource type="AnimationNodeAnimation" id=74]
 animation = "rifleFire"
@@ -630,7 +644,7 @@ input_3/name = "state 3"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=49]
-graph_offset = Vector2( -437.262, 5.88148 )
+graph_offset = Vector2( -235.599, -4.99899 )
 nodes/Animation/node = SubResource( 78 )
 nodes/Animation/position = Vector2( -440, 100 )
 "nodes/Animation 2/node" = SubResource( 74 )
@@ -644,9 +658,9 @@ nodes/Animation/position = Vector2( -440, 100 )
 nodes/OneShot/node = SubResource( 82 )
 nodes/OneShot/position = Vector2( -20, 120 )
 nodes/Transition/node = SubResource( 80 )
-nodes/Transition/position = Vector2( 420, 120 )
+nodes/Transition/position = Vector2( 380, 120 )
 nodes/output/position = Vector2( 620, 140 )
-node_connections = [ "OneShot", 0, "Animation", "OneShot", 1, "Animation 2", "Transition", 0, "Animation 5", "Transition", 1, "OneShot", "Transition", 2, "Animation 3", "Transition", 3, "Animation 4", "output", 0, "Transition" ]
+node_connections = [ "output", 0, "Transition", "OneShot", 0, "Animation", "OneShot", 1, "Animation 2", "Transition", 0, "Animation 5", "Transition", 1, "OneShot", "Transition", 2, "Animation 3", "Transition", 3, "Animation 4" ]
 
 [sub_resource type="AnimationNodeAnimation" id=41]
 animation = "unarmedFinished"
@@ -664,17 +678,18 @@ input_2/name = "state 2"
 input_2/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=35]
-graph_offset = Vector2( -450.259, -40.4494 )
+graph_offset = Vector2( -285.423, -57.0219 )
 nodes/Animation/node = SubResource( 33 )
 nodes/Animation/position = Vector2( -120, 20 )
 "nodes/Animation 3/node" = SubResource( 41 )
 "nodes/Animation 3/position" = Vector2( -120, 280 )
 nodes/Transition/node = SubResource( 34 )
 nodes/Transition/position = Vector2( 100, 100 )
-node_connections = [ "Transition", 0, "Animation", "Transition", 2, "Animation 3", "output", 0, "Transition" ]
+nodes/output/position = Vector2( 440, 140 )
+node_connections = [ "output", 0, "Transition", "Transition", 0, "Animation", "Transition", 2, "Animation 3" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=17]
-graph_offset = Vector2( -213.25, 73.4811 )
+graph_offset = Vector2( -357.121, -26.2844 )
 nodes/Transition/node = SubResource( 24 )
 nodes/Transition/position = Vector2( 320, 100 )
 nodes/knife/node = SubResource( 31 )
@@ -686,7 +701,7 @@ nodes/rifle/node = SubResource( 49 )
 nodes/rifle/position = Vector2( 100, 380 )
 nodes/unarmed/node = SubResource( 35 )
 nodes/unarmed/position = Vector2( 80, 80 )
-node_connections = [ "Transition", 0, "unarmed", "Transition", 1, "knife", "Transition", 2, "pistol", "Transition", 3, "rifle", "output", 0, "Transition" ]
+node_connections = [ "output", 0, "Transition", "Transition", 0, "unarmed", "Transition", 1, "knife", "Transition", 2, "pistol", "Transition", 3, "rifle" ]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.13475
@@ -800,8 +815,17 @@ bones/1/bound_children = [  ]
 mesh = SubResource( 52 )
 skin = SubResource( 53 )
 
+[node name="Flash" type="Particles" parent="Rotation_Helper/Weapons/Pistol"]
+transform = Transform( -0.0105207, 0.0534372, 0.998516, 0.999939, 0.00379688, 0.0103325, -0.00323907, 0.998564, -0.0534738, -1.11095, 0.243022, 0.876056 )
+emitting = false
+amount = 1
+lifetime = 0.1
+visibility_aabb = AABB( -3.94385, -4.0293, -4, 8, 8, 8 )
+process_material = SubResource( 85 )
+draw_pass_1 = SubResource( 86 )
+
 [node name="Rifle" type="Spatial" parent="Rotation_Helper/Weapons"]
-transform = Transform( 0.9, 0, 0, 0, 0.896795, 0.0758892, 0, -0.0758892, 0.896795, -2.03681, -1.17886, -2.40569 )
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -2.03681, -1.17886, -2.40569 )
 
 [node name="m4a1" type="MeshInstance" parent="Rotation_Helper/Weapons/Rifle"]
 transform = Transform( 0.0663085, 0, 0, 0, -2.37138e-08, -0.0663085, 0, 0.0663085, -2.37138e-08, 0.126533, 0.621476, -0.925969 )
@@ -810,6 +834,14 @@ mesh = SubResource( 67 )
 [node name="silencer" type="MeshInstance" parent="Rotation_Helper/Weapons/Rifle"]
 transform = Transform( 0.0663085, 0, 0, 0, -2.37138e-08, -0.0663085, 0, 0.0663085, -2.37138e-08, 0.126533, 0.621476, -0.925969 )
 mesh = SubResource( 68 )
+
+[node name="Flash" type="Particles" parent="Rotation_Helper/Weapons/Rifle"]
+transform = Transform( 2.46371e-08, 0.563631, 0.957543, 1.11111, -4.85682e-08, 0, 4.18555e-08, 0.957543, -0.563631, -0.140988, 0.483335, 2.8402 )
+emitting = false
+amount = 1
+lifetime = 0.1
+process_material = SubResource( 85 )
+draw_pass_1 = SubResource( 86 )
 
 [node name="Knife" type="MeshInstance" parent="Rotation_Helper/Weapons"]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.29958, -1.70731, 0 )
@@ -820,7 +852,6 @@ material/2 = ExtResource( 5 )
 material/3 = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Rotation_Helper"]
-autoplay = "unarmed"
 anims/RESET = SubResource( 10 )
 anims/knifeEquip = SubResource( 11 )
 anims/knifeFire = SubResource( 12 )
@@ -836,8 +867,8 @@ anims/rifleFire = SubResource( 70 )
 anims/rifleIdle = SubResource( 71 )
 anims/rifleReload = SubResource( 72 )
 anims/rifleUnequip = SubResource( 73 )
-anims/unarmed = SubResource( 15 )
-anims/unarmedFinished = SubResource( 42 )
+anims/unarmedEquip = SubResource( 84 )
+anims/unarmedUnequip = SubResource( 42 )
 script = ExtResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Rotation_Helper"]

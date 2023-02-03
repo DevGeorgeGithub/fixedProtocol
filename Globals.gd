@@ -28,6 +28,7 @@ func load_new_scene(new_scene_path):
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit() # Быстрый выход
 		if popup == null:
 			popup = POPUP_SCENE.instance()
 
