@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="fixedProtocol"
-run/main_scene="res://menu/Main_Menu.tscn"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]

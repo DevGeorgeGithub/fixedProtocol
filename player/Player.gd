@@ -49,6 +49,10 @@ const OBJECT_GRAB_RAY_DISTANCE = 10
 
 var globals
 
+onready var animationPlayer = $Rotation_Helper/AnimationPlayer
+onready var animationTree = $Rotation_Helper/AnimationTree
+
+
 func _ready():
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
@@ -60,6 +64,8 @@ func _ready():
 	MOUSE_SENSITIVITY = globals.mouse_sensitivity
 	global_transform.origin = globals.get_respawn_position()
 
+	animationPlayer.callback_function = funcref(self, "fire_bullet")
+
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
@@ -67,7 +73,7 @@ func _physics_process(delta):
 		weapon_select()
 	process_UI(delta)
 	process_respawn(delta)
-
+	
 func process_input(delta):
 	dir = Vector3()
 	var cam_xform = camera.get_global_transform()
@@ -145,6 +151,34 @@ func process_input(delta):
 
 	if grabbed_object != null:
 		grabbed_object.global_transform.origin = camera.global_transform.origin + (-camera.global_transform.basis.z.normalized() * OBJECT_GRAB_DISTANCE)
+	
+	
+	
+	if current_weapon > weapons['knife']:
+		if Input.is_action_just_pressed("reload") or weaponsPoint[current_weapon].weapon.ammo_in_weapon == 0:
+			if weaponsPoint[current_weapon].weapon.spare_ammo > 0:
+				weaponsPoint[current_weapon].weapon.reload_weapon()	
+				globals.play_sound("reload", false, camera.global_transform.origin)
+				animationTree["parameters/" + weapons.keys()[current_weapon] + "/Transition/current"] = 3	
+		
+	if Input.is_action_just_pressed("fire"):
+		if current_weapon == weapons['knife']:		
+			animationTree["parameters/knife/Transition/current"] = 1
+			animationTree["parameters/knife/OneShot/active"] = true
+
+		
+		if current_weapon == weapons['pistol']:
+			if Pistol_point.weapon.ammo_in_weapon > 0:			
+				animationTree["parameters/pistol/Transition/current"] = 1
+				animationTree["parameters/pistol/OneShot/active"] = true	
+				globals.play_sound("Pistol_shot", false, self.global_transform.origin)
+				
+	elif Input.is_action_pressed("fire") and current_weapon == weapons['rifle']:
+		if Rifle_point.weapon.ammo_in_weapon > 0:			
+			Rifle_point.fire_weapon()
+			animationTree["parameters/rifle/Transition/current"] = 1
+			animationTree["parameters/rifle/OneShot/active"] = true
+			globals.play_sound("Pistol_shot", false, $Rotation_Helper/Gun_Fire_Points/Rifle_Point/Ray_Cast.global_transform.origin)	
 
 func process_movement(delta):
 	dir.y = 0
@@ -188,54 +222,36 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_WHEEL_UP:
+				unequip()
 				if current_weapon < weapons.size() - 1:
 					current_weapon += 1
 				else:
 					current_weapon = 0
 			elif event.button_index == BUTTON_WHEEL_DOWN:
+				unequip()
 				if current_weapon > 0:
 					current_weapon -= 1
 				else:
 					current_weapon = weapons.size() - 1
 
-	fire()
-	
-	if current_weapon > weapons['knife']:
-		if Input.is_action_just_pressed("reload") or weaponsPoint[current_weapon].weapon.ammo_in_weapon == 0:
-			if weaponsPoint[current_weapon].weapon.spare_ammo > 0:
-				weaponsPoint[current_weapon].weapon.reload_weapon()	
-				globals.play_sound("reload", false, camera.global_transform.origin)	
-		
-func fire():
-
-	if Input.is_action_just_pressed("fire") and current_weapon == weapons['knife']:
-		Knife_point.fire_weapon()
-
-	if Input.is_action_pressed("fire") and current_weapon == weapons['rifle']:
-		if Rifle_point.weapon.ammo_in_weapon > 0:			
-			Rifle_point.fire_weapon()
-			globals.play_sound("Pistol_shot", false, $Rotation_Helper/Gun_Fire_Points/Rifle_Point/Ray_Cast.global_transform.origin)	
-
-	if Input.is_action_just_pressed("fire") and current_weapon == weapons['pistol']:
-		if Input.is_action_just_pressed("fire") and current_weapon == weapons['pistol']:
-			if Pistol_point.weapon.ammo_in_weapon > 0:			
-				Pistol_point.fire_weapon()	
-				globals.play_sound("Pistol_shot", false, self.global_transform.origin)
+func fire_bullet():
+	weaponsPoint[current_weapon].fire_weapon()
 
 func weapon_select():
 	var countSwitchKeys = 4
 	for key in countSwitchKeys:
-		if Input.is_action_just_pressed("weapon" + str(key)):
+		if Input.is_action_just_pressed("weapon" + str(key)):	
+			unequip()	
 			current_weapon = key
 
-	weaponVisible([knife,pistol,rifle])
+func unequip():
+	animationTree["parameters/Transition/current"] = current_weapon
+	animationTree["parameters/" + weapons.keys()[current_weapon] + "/Transition/current"] = 0
+	animationTree["parameters/" + weapons.keys()[current_weapon] + "/Transition/current"] = 2	
 
-func weaponVisible(weapon):
-	for weaponIndex in weapons.size() - 1:
-		if current_weapon == weaponIndex + 1:
-			weapon[weaponIndex].visible = true
-		else:
-			weapon[weaponIndex].visible = false
+func equip():
+	animationTree["parameters/Transition/current"] = current_weapon
+	animationTree["parameters/" + weapons.keys()[current_weapon] + "/Transition/current"] = 0
 
 func process_UI(delta):
 	if current_weapon <= weapons['knife']:
@@ -265,8 +281,8 @@ func bullet_hit(damage, bullet_hit_pos):
 	health -= damage
 
 func process_respawn(delta):
-
 	if health <= 0:
+		unequip()
 		current_weapon = weapons['unarmed']
 
 		if grabbed_object != null:
@@ -286,3 +302,6 @@ func process_respawn(delta):
 		if current_weapon != null:
 			for _weapon in range(2, weapons.size()):
 				weaponsPoint[_weapon].weapon.reset_weapon(weaponsPoint[_weapon].defaultAmmo_in_weapon, weaponsPoint[_weapon].defaultSpare_ammo)
+
+
+

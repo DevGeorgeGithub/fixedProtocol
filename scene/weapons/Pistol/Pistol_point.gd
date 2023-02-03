@@ -9,7 +9,7 @@ var bullet_scene = preload("res://scene/weapons/Bullet_Scene.tscn")
 func _init():
 	weapon = Weapon.new(15,10,20,10)
 
-func fire_weapon():
+func fire_weapon():	
 	var clone = bullet_scene.instance()
 	var scene_root = get_tree().root.get_children()[0]
 	scene_root.add_child(clone)
