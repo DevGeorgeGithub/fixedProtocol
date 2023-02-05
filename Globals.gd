@@ -33,8 +33,8 @@ func _process(delta):
 			popup = POPUP_SCENE.instance()
 
 			popup.get_node("Button_quit").connect("pressed", self, "popup_quit")
-			popup.connect("popup_hide", self, "popup_closed")
-			popup.get_node("Button_resume").connect("pressed", self, "popup_closed")
+			# popup.connect("popup_hide", self, "popup_closed")
+			# popup.get_node("Button_resume").connect("pressed", self, "popup_closed")
 
 			canvas_layer.add_child(popup)
 			popup.popup_centered()
@@ -43,12 +43,12 @@ func _process(delta):
 
 			get_tree().paused = true
 
-func popup_closed():
-	get_tree().paused = false
+# func popup_closed():
+# 	get_tree().paused = false
 
-	if popup != null:
-		popup.queue_free()
-		popup = null
+# 	if popup != null:
+# 		popup.queue_free()
+# 		popup = null
   
 
 func popup_quit():

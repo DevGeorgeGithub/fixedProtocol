@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scene/Utility/Ammo_Pickup.gd" type="Script" id=1]
+[ext_resource path="res://scene/weapons/ammo_pickup/ammo_pickup.gd" type="Script" id=1]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.282353, 0.564706, 0.270588, 1 )

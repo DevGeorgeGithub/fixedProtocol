@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://scene/Turret.gd" type="Script" id=1]
-[ext_resource path="res://scene/TurretBodies.gd" type="Script" id=3]
+[ext_resource path="res://scene/items/Turret.gd" type="Script" id=1]
+[ext_resource path="res://scene/items/TurretBodies.gd" type="Script" id=3]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -21,7 +21,7 @@ material = SubResource( 14 )
 extents = Vector3( 1.63034, 1.05653, 0.94128 )
 
 [sub_resource type="SphereShape" id=7]
-radius = 16.488
+radius = 7.79985
 
 [sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 1
