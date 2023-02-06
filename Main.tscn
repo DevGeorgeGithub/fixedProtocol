@@ -39,7 +39,9 @@ background_mode = 2
 background_sky = SubResource( 9 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_sky_contribution = 0.6
+ssao_light_affect = 1.0
 glow_intensity = 1.0
+glow_strength = 1.11
 glow_blend_mode = 0
 glow_bicubic_upscale = true
 
@@ -99,8 +101,10 @@ material/0 = SubResource( 5 )
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall4/StaticBody"]
 shape = SubResource( 6 )
 
+[node name="MeshInstance" type="MeshInstance" parent="Level/Walls"]
+
 [node name="DirectionalLight" type="DirectionalLight" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -1, 39, 0 )
+transform = Transform( 1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -1, 39, 3.37659 )
 
 [node name="Player" parent="Level" instance=ExtResource( 1 )]
 

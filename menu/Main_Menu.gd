@@ -18,14 +18,15 @@ func _ready():
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	var globals = get_node("/root/Globals")
-	$Options_Menu/HSlider_Mouse_Sensitivity.value = globals.mouse_sensitivity
+	# var globals = get_node("/root/Globals") 
+	var global = get_node("/root/Global") 
+	$Options_Menu/HSlider_Mouse_Sensitivity.value = global.mouse_sensitivity
 
 func start_menu_button_pressed(button_name):
 	if button_name == "start":
 		start_menu.visible = false
 		set_mouse_and_joypad_sensitivity()
-		get_node("/root/Globals").load_new_scene(mainArea)
+		get_node("/root/Global").load_new_scene(mainArea)
 	elif button_name == "options":
 		options_menu.visible = true
 		start_menu.visible = false
@@ -41,5 +42,5 @@ func options_menu_button_pressed(button_name):
 
 
 func set_mouse_and_joypad_sensitivity():
-	var globals = get_node("/root/Globals")
-	globals.mouse_sensitivity = $Options_Menu/HSlider_Mouse_Sensitivity.value
+	var global = get_node("/root/Global")
+	global.mouse_sensitivity = $Options_Menu/HSlider_Mouse_Sensitivity.value

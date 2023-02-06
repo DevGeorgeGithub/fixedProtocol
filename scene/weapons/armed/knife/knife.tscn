@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://models/Sharp Metal.material" type="Material" id=1]
-[ext_resource path="res://models/Neon Emision.material" type="Material" id=2]
-[ext_resource path="res://models/Sharp Metal_001.material" type="Material" id=3]
-[ext_resource path="res://models/Metal Black.material" type="Material" id=4]
-[ext_resource path="res://models/Dull Metal.material" type="Material" id=5]
+[ext_resource path="res://models/weapons/knife/Sharp Metal.material" type="Material" id=1]
+[ext_resource path="res://models/weapons/knife/Neon Emision.material" type="Material" id=2]
+[ext_resource path="res://models/weapons/knife/Sharp Metal_001.material" type="Material" id=3]
+[ext_resource path="res://models/weapons/knife/Metal Black.material" type="Material" id=4]
+[ext_resource path="res://models/weapons/knife/Dull Metal.material" type="Material" id=5]
 [ext_resource path="res://scene/weapons/armed/knife/knife_pickup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scene/weapons/muzzleFlash.tscn" type="PackedScene" id=7]
 

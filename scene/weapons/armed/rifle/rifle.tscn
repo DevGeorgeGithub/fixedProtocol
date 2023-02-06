@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scene/weapons/muzzleFlash.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/weapons/armed/rifle/rifle_pickup.tscn" type="PackedScene" id=2]
-[ext_resource path="res://models/n4a1.material" type="Material" id=3]
+[ext_resource path="res://models/weapons/rifle/n4a1.material" type="Material" id=3]
+[ext_resource path="res://sounds/weapons/shot.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/weapons/reload.wav" type="AudioStream" id=5]
 
 [sub_resource type="GDScript" id=12]
 script/source = "# extends Spatial
@@ -251,6 +253,20 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Vector3( 0.2, 0.2, 0.2 ) ]
 }
+tracks/7/type = "audio"
+tracks/7/path = NodePath("AudioStreamPlayer3D")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
 
 [sub_resource type="Animation" id=8]
 length = 0.001
@@ -426,6 +442,20 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector3( 0.2, 0.2, 0.2 ) ]
 }
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer3D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "Unequip"
@@ -553,6 +583,9 @@ anims/Reload = SubResource( 11 )
 anims/Unequip = SubResource( 9 )
 
 [node name="MuzzleFlash" parent="." instance=ExtResource( 1 )]
-transform = Transform( -7.61065e-08, -1.74111, -3.60118, 4, -1.74846e-07, 0, -1.57413e-07, -3.60118, 1.74111, 0.685215, 0.269388, -3.73083 )
+transform = Transform( -7.61065e-08, -1.74111, -3.60118, 4, -1.74846e-07, 0, -1.57413e-07, -3.60118, 1.74111, 3.33565, -1.22445, -11.8394 )
 layers = 2
 visibility_aabb = AABB( -0.972633, -1.3885, -1.64941, 3.748, 2.50063, 3.39452 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )

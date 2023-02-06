@@ -5,7 +5,6 @@ class_name Weapon
 var weapon_manager = null
 var player = null
 var ray = null
-
 var hitbox = null
 
 var is_equipped = false

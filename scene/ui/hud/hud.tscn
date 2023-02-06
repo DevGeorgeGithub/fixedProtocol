@@ -34,6 +34,16 @@ margin_right = 258.37
 margin_bottom = 82.9522
 text = "Pistol: 25/50"
 
+[node name="GrenadeUI" type="Label" parent="Background"]
+margin_left = 146.37
+margin_top = 75.0
+margin_right = 258.37
+margin_bottom = 82.9522
+text = "Grenades: 10"
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="Display" type="ColorRect" parent="Background"]
 anchor_bottom = 1.0
 margin_right = 123.0

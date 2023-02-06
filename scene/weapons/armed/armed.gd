@@ -78,9 +78,8 @@ func hit():
 			body.bullet_hit(damage, hitbox.global_transform)
 
 func reload():
-	if ammo_in_mag < mag_size and extra_ammo > 0 or ammo_in_mag == 0:
+	if ammo_in_mag < mag_size and extra_ammo > 0 or ammo_in_mag == 0 and extra_ammo > 0:
 		is_firing = false
-		
 		animation_player.play("Reload", -1.0, reload_speed)
 		is_reloading = true
 

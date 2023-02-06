@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scene/weapons/weapon_pickup.gd" type="Script" id=1]
-[ext_resource path="res://models/secondary.material" type="Material" id=2]
-[ext_resource path="res://models/primary.material" type="Material" id=3]
+[ext_resource path="res://models/weapons/pistol/secondary.material" type="Material" id=2]
+[ext_resource path="res://models/weapons/pistol/primary.material" type="Material" id=3]
 
 [sub_resource type="BoxShape" id=101]
 extents = Vector3( 0.687036, 1.00817, 1.14803 )
