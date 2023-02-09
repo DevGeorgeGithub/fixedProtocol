@@ -32,18 +32,16 @@ var global
 
 func _ready():
 	camera.get_node("HoldPosition").weapon_manager = weapon_manager
-
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	global = get_node("/root/Global")
 	MOUSE_SENSITIVITY = global.mouse_sensitivity
-	global_transform.origin = global.get_respawn_position()
 
 func _process(delta):
 	process_weapons(delta)
 
 func _physics_process(delta):
 	process_input(delta)
-	# process_respawn(delta)
+	process_respawn(delta)
 	
 func process_input(delta):
 
@@ -95,10 +93,6 @@ func process_input(delta):
 	
 	flash_light()
 
-	camera.get_node("HoldPosition").pick_object()
-
-	$CamRoot/GrenadeThrowPos.throwGrenade()
-
 func process_movement_effects(speed, delta):
 	
 	if velocity.length() < 3.0 or is_on_floor() == false:
@@ -146,7 +140,7 @@ func process_weapons(delta):
 
 	if weapon_manager.current_weapon.name != "Unarmed":
 		weapon_manager.current_weapon.sway(delta)
-
+		
 	if Input.is_action_pressed("ads"):
 		weapon_manager.current_weapon.aim_down_sights(true, delta)
 	else:
@@ -155,6 +149,10 @@ func process_weapons(delta):
 func _input(event):
 
 	if event is InputEventMouseMotion:
+		if $CamRoot.SprayResetTween.is_active():
+			$CamRoot.SprayResetTween.stop_all()
+			$CamRoot.SprayReset = true
+
 		$CamRoot.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY * -1))
 		$CamRoot.rotation_degrees.x = clamp($CamRoot.rotation_degrees.x, -75, 75)
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
@@ -167,41 +165,24 @@ func _input(event):
 				BUTTON_WHEEL_DOWN:
 					weapon_manager.previous_weapon()		
 	
-# func add_health(additional_health):
-# 	health += additional_health
-# 	health = clamp(health, 0, MAX_HEALTH)
+func add_health(additional_health):
+	if health == MAX_HEALTH:
+		return false
+	health += additional_health
+	health = clamp(health, 0, MAX_HEALTH)
+	return true
 
-# func add_ammo(additional_ammo):
-# 	if (current_weapon > weapons['knife']):
-# 		weaponsPoint[current_weapon].weapon.spare_ammo += weaponsPoint[current_weapon].weapon.ammo_in_bag * additional_ammo
+func bullet_hit(damage, bullet_hit_pos):
+	health -= damage
 
-# func add_grenade(additional_grenade):
-# 	grenade_amounts[current_grenade] += additional_grenade
-# 	grenade_amounts[current_grenade] = clamp(grenade_amounts[current_grenade], 0, 4)
-
-# func bullet_hit(damage, bullet_hit_pos):
-# 	health -= damage
-
-# func process_respawn(delta):
-# 	if health <= 0:
-# 		unequip()
-# 		current_weapon = weapons['unarmed']
-
-# 		if grabbed_object != null:
-# 			grabbed_object.mode = RigidBody.MODE_RIGID
-# 			grabbed_object.apply_impulse(Vector3(0, 0, 0), -camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE / 2)
-
-# 			grabbed_object.collision_layer = 1
-# 			grabbed_object.collision_mask = 1
-
-# 			grabbed_object = null
+func process_respawn(delta):
+	if health <= 0:
+		weapon_manager.change_weapon("Empty")
+		camera.get_node("HoldPosition").picked_object = null
   
-# 		global_transform.origin = globals.get_respawn_position()
+		global_transform.origin = Vector3(0, 0, 0)
 
-# 		health = 100
-# 		grenade_amounts = {"Grenade":2}
-
-# 		if current_weapon != null:
-# 			for _weapon in range(2, weapons.size()):
-# 				weaponsPoint[_weapon].weapon.reset_weapon(weaponsPoint[_weapon].defaultAmmo_in_weapon, weaponsPoint[_weapon].defaultSpare_ammo)
-
+		health = 100
+		$CamRoot/GrenadeThrowPos.grenade_amounts = 5
+		
+		weapon_manager.reset_weapons()

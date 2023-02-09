@@ -1,5 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://models/weapons/grenade/grenade.gltf" type="PackedScene" id=1]
+[ext_resource path="res://models/weapons/grenade/textures/Scene_-_Root_diffuse.png" type="Texture" id=1]
+[ext_resource path="res://models/weapons/grenade/textures/Scene_-_Root_specularGlossiness.png" type="Texture" id=2]
+[ext_resource path="res://models/weapons/grenade/grenade.glb" type="PackedScene" id=3]
 
-[node name="grenade" instance=ExtResource( 1 )]
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 2 )
+
+[node name="grenade" instance=ExtResource( 3 )]
+
+[node name="grenade_1__0" parent="Sketchfab_model/ec1546dbf00e41e8ac65326d2c8d8f8ffbx/RootNode/grenade_1" index="0"]
+material/0 = SubResource( 1 )
+
+[node name="ring__0" parent="Sketchfab_model/ec1546dbf00e41e8ac65326d2c8d8f8ffbx/RootNode/grenade_1/ring" index="0"]
+material/0 = SubResource( 2 )

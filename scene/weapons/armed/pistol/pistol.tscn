@@ -294,12 +294,12 @@ weapon_name = "Pistol"
 weapon_pickup = ExtResource( 2 )
 fire_rate = 3.0
 equip_pos = Vector3( 1.18102, -0.16196, -1.64362 )
-impact_effect = ExtResource( 1 )
 muzzle_flash_path = NodePath("Root/Body/MuzzleFlash")
 equip_speed = 0.5
 unequip_speed = 0.5
 reload_speed = 0.5
 ads_pos = Vector3( 0, -0.162, -1.644 )
+SprayVectors = PoolVector2Array( 0, 0, 0.95, 1.5, -0.65, 0.98, 0.09, 1, -1, 2, 1, 1.46, -1.28, 2, 2, 0.5, -0.42, 1, -0.21, 1.29, 0.82, 0.92, -0.709, 0.26, 0.89, -0.47, -1.19, 0.24, 1.16, 0.71 )
 
 [node name="Root" type="Spatial" parent="."]
 transform = Transform( 1, 5.82077e-10, 0, -3.7835e-09, 1, 9.31323e-10, 0, 9.31323e-10, 1, 0, 0, 0 )
@@ -348,3 +348,9 @@ anims/Unequip = SubResource( 106 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.484
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

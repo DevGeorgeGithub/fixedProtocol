@@ -22,14 +22,16 @@ func _ready():
 
 	all_weapons = {
 		"Unarmed" : preload("res://scene/weapons/unarmed/unarmed.tscn"),
-		"Knife" : preload("res://scene/weapons/armed/knife/knife.tscn"),
+		# "Knife" : preload("res://scene/weapons/armed/knife/knife.tscn"),
+		"Knife" : preload("res://scene/weapons/armed/rocket_launcher/Components/AT4 Launcher.tscn"),
 		"Pistol" : preload("res://scene/weapons/armed/pistol/pistol.tscn"),
 		"Rifle" : preload("res://scene/weapons/armed/rifle/rifle.tscn")
 	}
 	
 	weapons = {
 		"Empty" : $Unarmed,
-		"Knife" : $Knife,
+		# "Knife" : $Knife,
+		"Knife" : $AT4,
 		"Primary" : $Pistol,
 		"Secondary" : $Rifle
 	}
@@ -167,7 +169,6 @@ func add_weapon(weapon_data):
 		weapon.extra_ammo = weapon_data["ExtraAmmo"]
 		weapon.mag_size = weapon_data["MagSize"]
 		weapon.transform.origin = weapon.equip_pos
-		
 		weapons["Secondary"] = weapon
 		change_weapon("Secondary")
 		
@@ -241,8 +242,15 @@ func process_weapon_pickup():
 			if Input.is_action_just_pressed("interact"):
 				switch_weapon(weapon_data)
 				body.queue_free()
+
+				get_parent().ConnectGunSignals()
 	else:
 		hide_interaction_prompt()
+
+func reset_weapons():
+	for w in weapons:
+		if is_instance_valid(weapons[w]) and w != "Empty":
+			weapons[w].reset_weapon()
 
 func update_hud(weapon_data):
 	var weapon_slot = "1"

@@ -64,6 +64,4 @@ func popup_quit():
 		
 	load_new_scene(MAIN_MENU_PATH)
 
-func get_respawn_position():
-	return Vector3(0, 0, 0)
 

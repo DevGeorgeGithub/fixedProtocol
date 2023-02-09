@@ -5,7 +5,6 @@ export var ammo_in_mag = 5
 export var extra_ammo = 10
 onready var mag_size = ammo_in_mag
 
-
 func _ready():
 	connect("sleeping_state_changed", self, "on_sleeping")
 

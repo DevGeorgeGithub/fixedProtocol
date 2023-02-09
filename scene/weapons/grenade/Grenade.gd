@@ -14,7 +14,7 @@ var blast_area
 
 func _ready():
 	rigid_shape = $CollisionShape
-	grenade_mesh = $Grenade
+	grenade_mesh = $grenade
 	blast_area = $Blast_Area
 
 func _process(delta):

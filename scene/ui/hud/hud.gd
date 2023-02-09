@@ -19,6 +19,7 @@ func _ready():
 	hide_interaction_prompt()
 
 func _process(delta):
+	health_ui.text = "Health: " + str(owner.health)
 	grenade_ui.text = "Grenades: " + str(get_parent().get_node("CamRoot/GrenadeThrowPos").grenade_amounts)
 	
 func update_weapon_ui(weapon_data, weapon_slot):

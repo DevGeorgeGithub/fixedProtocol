@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scene/items/Turret/Turret.gd" type="Script" id=1]
+[ext_resource path="res://scene/items/Turret/TurretBodies.gd" type="Script" id=3]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="SphereMesh" id=16]
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="CapsuleMesh" id=15]
+material = SubResource( 14 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1.63034, 1.05653, 0.94128 )
+
+[sub_resource type="SphereShape" id=7]
+radius = 7.79985
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector3( 0, 9.8, 0 )
+radial_accel = 2.0
+radial_accel_random = 1.0
+scale = 6.0
+scale_random = 0.2
+
+[sub_resource type="CapsuleMesh" id=13]
+radius = 0.1
+mid_height = 0.4
+radial_segments = 6
+rings = 3
+
+[node name="Turret" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04731, 0 )
+script = ExtResource( 1 )
+use_raycast = true
+
+[node name="Base" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.73286, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Turret_Base" type="MeshInstance" parent="Base"]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 1 )
+
+[node name="Static_Body" type="StaticBody" parent="Base"]
+script = ExtResource( 3 )
+path_to_turret_root = NodePath("../..")
+
+[node name="Collision_Shape" type="CollisionShape" parent="Base/Static_Body"]
+shape = SubResource( 2 )
+
+[node name="Collision_Shape_2" type="CollisionShape" parent="Base/Static_Body"]
+shape = SubResource( 3 )
+
+[node name="Head" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.67888, 0 )
+
+[node name="Turret_Head" type="MeshInstance" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.429213, 0 )
+mesh = SubResource( 16 )
+
+[node name="Flash" type="MeshInstance" parent="Head"]
+transform = Transform( -0.144461, 0, 0, 0, -0.18687, 0, 0, 0, -0.198189, 0, 0, 0 )
+mesh = SubResource( 15 )
+
+[node name="Ray_Cast" type="RayCast" parent="Head"]
+cast_to = Vector3( 0, 0, -40 )
+
+[node name="Barrel_End" type="Spatial" parent="Head"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -2.93683 )
+
+[node name="Static_Body" type="StaticBody" parent="Head"]
+script = ExtResource( 3 )
+path_to_turret_root = NodePath("../..")
+
+[node name="Collision_Shape" type="CollisionShape" parent="Head/Static_Body"]
+shape = SubResource( 6 )
+
+[node name="Collision_Shape_2" type="CollisionShape" parent="Head/Static_Body"]
+shape = SubResource( 6 )
+
+[node name="Vision_Area" type="Area" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 9.46118, 0, 0, 0, 1, 0, 1.62651, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="Collision_Shape" type="CollisionShape" parent="Head/Vision_Area"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="Smoke" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.59127, 0 )
+emitting = false
+amount = 64
+lifetime = 1.4
+visibility_aabb = AABB( -3.6, -2.4, -2.5, 7.5, 16, 7.3 )
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 13 )

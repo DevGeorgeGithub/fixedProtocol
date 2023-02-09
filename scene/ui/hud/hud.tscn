@@ -23,9 +23,6 @@ margin_top = 28.2606
 margin_right = 250.37
 margin_bottom = 56.2606
 text = "Health: 100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="WeaponUI" type="Label" parent="Background"]
 margin_left = 146.37
