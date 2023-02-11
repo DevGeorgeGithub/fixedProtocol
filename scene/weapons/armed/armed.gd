@@ -75,6 +75,8 @@ func fire_bullet():
 
 		bullet_hit(body)
 
+		if body.is_in_group("Enemies"):
+			body.health -= damage		
 	spraying()
 
 	bullet_hole()

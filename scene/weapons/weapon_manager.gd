@@ -22,18 +22,17 @@ func _ready():
 
 	all_weapons = {
 		"Unarmed" : preload("res://scene/weapons/unarmed/unarmed.tscn"),
-		# "Knife" : preload("res://scene/weapons/armed/knife/knife.tscn"),
-		"Knife" : preload("res://scene/weapons/armed/rocket_launcher/Components/AT4 Launcher.tscn"),
+		"Knife" : preload("res://scene/weapons/armed/knife/knife.tscn"),
 		"Pistol" : preload("res://scene/weapons/armed/pistol/pistol.tscn"),
-		"Rifle" : preload("res://scene/weapons/armed/rifle/rifle.tscn")
+		"Rifle" : preload("res://scene/weapons/armed/rifle/rifle.tscn"),
+		"AT4" : preload("res://scene/weapons/armed/rocket_launcher/Components/AT4 Launcher.tscn"),
 	}
 	
 	weapons = {
 		"Empty" : $Unarmed,
-		# "Knife" : $Knife,
-		"Knife" : $AT4,
+		"Knife" : $Knife,
 		"Primary" : $Pistol,
-		"Secondary" : $Rifle
+		"Secondary" : $Rifle,
 	}
 	
 	for w in weapons:
@@ -262,5 +261,5 @@ func update_hud(weapon_data):
 			weapon_slot = "2"
 		"Secondary":
 			weapon_slot = "3"
-
-	hud.update_weapon_ui(weapon_data, weapon_slot)
+	if owner.has_node("HUD"):
+		hud.update_weapon_ui(weapon_data, weapon_slot)

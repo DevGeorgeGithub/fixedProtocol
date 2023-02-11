@@ -1,16 +1,13 @@
-# extends Spatial
 extends Armed
 
 onready var RocketPoint = $RocketPoint
 onready var AnimPlay = $AnimationPlayer
 onready var _Camera = get_viewport().get_camera()
 onready var _Viewport = get_viewport().get_size()
-
 export var RocketSpeed: int = 80
 
 var Rocket = preload("res://scene/weapons/armed/rocket_launcher/Components/Rocket.tscn")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	animation_player = $AnimationPlayer
 	if animation_player != null:
@@ -19,7 +16,9 @@ func _ready():
 func _PrimaryFire():
 	var Target = GetCameraCollision()
 	var RocketDirection = (Target-RocketPoint.global_transform.origin).normalized()
+	muzzle_flash.emitting = true
 	SpawnRocket(RocketDirection)
+	update_ammo("consume")
 
 func GetCameraCollision()->Vector3:
 	var RayOrgin = _Camera.project_ray_origin(_Viewport/2)
@@ -40,7 +39,6 @@ func SpawnRocket(Dir:Vector3):
 	R.set_mode(RigidBody.MODE_RIGID)
 	R.set_global_transform(RocketPoint.get_global_transform())
 	R.set_linear_velocity(Dir*RocketSpeed)
-	
 
 func _PrimaryFireReleased():
 	pass
@@ -48,3 +46,5 @@ func _PrimaryFireReleased():
 func on_animation_finish(anim_name):
 	.on_animation_finish(anim_name)
 
+func reset_spray():
+	pass

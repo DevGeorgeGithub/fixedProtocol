@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scene/weapons/weapon_manager.gd" type="Script" id=1]
 [ext_resource path="res://scene/ui/hud/hud.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://scene/weapons/grenade/GrenadeThrowPos.gd" type="Script" id=6]
 [ext_resource path="res://scene/weapons/RayCast.gd" type="Script" id=7]
 [ext_resource path="res://player/CamRoot.gd" type="Script" id=8]
-[ext_resource path="res://scene/weapons/armed/rocket_launcher/Components/AT4 Launcher.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/weapons/armed/knife/knife.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scene/weapons/unarmed/unarmed.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scene/weapons/armed/pistol/pistol.tscn" type="PackedScene" id=23]
@@ -138,6 +137,7 @@ reload_speed = 0.5
 
 [node name="Pistol" parent="CamRoot/Weapons" instance=ExtResource( 23 )]
 visible = false
+damage = 25
 SpayScale = 1
 
 [node name="Rifle" parent="CamRoot/Weapons" instance=ExtResource( 24 )]
@@ -148,8 +148,6 @@ transform = Transform( -0.2, -1.74846e-08, 7.64274e-16, 0, -8.74228e-09, -0.2, 1
 
 [node name="silencer" parent="CamRoot/Weapons/Rifle" index="1"]
 transform = Transform( -0.2, -1.74846e-08, 7.64274e-16, 0, -8.74228e-09, -0.2, 1.74846e-08, -0.2, 8.74228e-09, 2.84901, -0.909273, -1.89325 )
-
-[node name="AT4" parent="CamRoot/Weapons" instance=ExtResource( 9 )]
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 

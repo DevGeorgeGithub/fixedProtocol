@@ -84,6 +84,7 @@ shape = SubResource( 2 )
 
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.521643 )
+emitting = false
 amount = 100
 local_coords = false
 process_material = SubResource( 3 )

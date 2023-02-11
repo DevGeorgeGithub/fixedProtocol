@@ -7,9 +7,6 @@ onready var _Particles = $Particles
 func _ready():
 	_Particles.emitting = true
 
-
-
-
 func _on_Rocket_body_entered(body):
 	var W = get_tree().get_root()
 	var E = Explosion.instance()
