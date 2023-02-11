@@ -119,7 +119,9 @@ func knife_hit():
 	for body in bodies:
 		if body == player:
 			continue
-
+		if body.is_in_group("Enemies"):
+			body.health -= damage
+			
 		bullet_hit(body)
 
 func bullet_hit(body):

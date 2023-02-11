@@ -10,8 +10,6 @@ var space_state
 
 var angry = false
 
-var velocity
-
 var left_edge = false
 
 var health = 100
@@ -22,7 +20,7 @@ func _ready():
 
 func _physics_process(delta):
 	var next = agent.get_next_location()
-	velocity = (next - transform.origin).normalized()
+	var velocity = (next - transform.origin).normalized()
 	move_and_slide(velocity * speed, Vector3.UP)
 
 	fire_trigger()

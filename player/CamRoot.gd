@@ -14,7 +14,7 @@ func _ready():
 func ConnectGunSignals():
 	for w in weapon_manager.weapons:
 		if is_instance_valid(weapon_manager.weapons[w]):
-			if w != "Empty" and !weapon_manager.weapons[w].is_connected("SprayCalc", self,"MouseSpray"):
+			if w != "Empty" and w != "Knife" and !weapon_manager.weapons[w].is_connected("SprayCalc", self,"MouseSpray"):
 				weapon_manager.weapons[w].connect("SprayCalc", self,"MouseSpray")
 				weapon_manager.weapons[w].connect("ResetSpray", self,"ResetMouseSpray")
 

@@ -309,6 +309,7 @@ material = SubResource( 5 )
 script = ExtResource( 7 )
 weapon_name = "AT4"
 weapon_pickup = ExtResource( 9 )
+damage = 100
 muzzle_flash_path = NodePath("Particles")
 
 [node name="AT4L" type="MeshInstance" parent="."]

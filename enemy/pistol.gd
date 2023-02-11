@@ -1,17 +1,17 @@
 extends Spatial
 
 export var damage = 5
-############################ # через global add scene, $timer
 var bullet_scene = preload("res://scene/weapons/Bullet_Scene.tscn")
-var timer = 1
+var TIME_PERIOD = 1
+var time = 0
+
 func _process(delta):
 	if owner.angry:
 		self.visible = true
-		if timer <= 0:
+		time += delta
+		if time > TIME_PERIOD:
 			fire_bullet()
-			timer = 1
-		else:
-			timer -= delta
+			time = 0
 
 func fire_bullet():
 	var clone = bullet_scene.instance()
@@ -23,4 +23,4 @@ func fire_bullet():
 	clone.BULLET_DAMAGE = damage
 	clone.BULLET_SPEED = 60
 	owner.player.health -= damage
-############################
+

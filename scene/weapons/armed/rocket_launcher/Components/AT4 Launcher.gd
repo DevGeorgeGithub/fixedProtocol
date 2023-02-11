@@ -1,7 +1,6 @@
 extends Armed
 
 onready var RocketPoint = $RocketPoint
-onready var AnimPlay = $AnimationPlayer
 onready var _Camera = get_viewport().get_camera()
 onready var _Viewport = get_viewport().get_size()
 export var RocketSpeed: int = 80
@@ -18,7 +17,7 @@ func _PrimaryFire():
 	var RocketDirection = (Target-RocketPoint.global_transform.origin).normalized()
 	muzzle_flash.emitting = true
 	SpawnRocket(RocketDirection)
-	update_ammo("consume")
+	update_ammo("consume")		
 
 func GetCameraCollision()->Vector3:
 	var RayOrgin = _Camera.project_ray_origin(_Viewport/2)
