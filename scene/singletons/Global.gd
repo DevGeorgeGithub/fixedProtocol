@@ -7,6 +7,8 @@ const MAIN_MENU_PATH = "res://menu/Main_Menu.tscn"
 const POPUP_SCENE = preload("res://menu/Pause_Popup.tscn")
 var popup = null
 
+var weather
+
 func instantiate_node(packed_scene, pos = null, parent = null):
 	var clone = packed_scene.instance()
 	
